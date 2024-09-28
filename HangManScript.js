@@ -47,6 +47,22 @@ function startGame() {
     createInputGroup();
 }
 
+function checkGameStatus(letters) {
+    let allGuessed = true;
+    for (let i = 0; i < letters.length && allGuessed; ++i) {
+        if (letters[i].innerHTML === " _ ") {
+            allGuessed = false;
+        }
+    }
+    if (allGuessed) {
+        document.getElementById("resultDisplay").innerText
+            = "Congratulations! You've guessed the word: " + word;
+    } else if (lives === 0) {
+        document.getElementById("resultDisplay").innerText
+            = "Game Over! The word was: " + word;
+    }
+}
+
 function checkLetter() {
     const letters = document.getElementsByTagName("span");
     const letter = document.getElementById("userLetter").value.toUpperCase();
@@ -62,16 +78,5 @@ function checkLetter() {
         --lives;
         document.getElementById("livesDisplay").innerText = "Lives  " + lives;
     }
-    if (lives === 0) {
-        document.getElementById("resultDisplay").innerText = "Game Over! The word was: " + word;
-    }
-    let allGuessed = true;
-    for (let i = 0; i < letters.length && allGuessed; ++i) {
-        if (letters[i].innerHTML === " _ ") {
-            allGuessed = false;
-        }
-    }
-    if (allGuessed) {
-        document.getElementById("resultDisplay").innerText = "Congratulations! You've guessed the word: " + word;
-    }
+    checkGameStatus(letters);
 }
