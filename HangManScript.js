@@ -7,39 +7,41 @@ function getRandomWord() {
     return words[index];
 }
 
+function addAttributes(element, attributes) {
+    for (let i = 0; i < attributes.length; i += 2) {
+        element.setAttribute(attributes[i], attributes[i + 1]);
+    }
+    return element;
+}
+
 function createInputGroup() {
     const container = document.getElementById("inputGroup");
-    const elements = [
-        ["div", "class", "input-group mb-3", "id", "inputGroup"],
-        ["input", "type", "text", "class", "form-control", "placeholder",
-            "Enter letter", "id", "userLetter"],
-        ["button", "type", "button", "class", "btn btn-primary", "onclick",
-            "checkLetter()", "innerHTML", "Check Letter"],
-        ["div", "id", "livesDisplay", "innerText", "Lives " + lives],
-        ["div", "style", "font-size:50px", "id", "resultDisplay"]
-    ];
-    let inputGroup = "";
-    for (let i = 0; i < elements.length; i++) {
-        const element = document.createElement(elements[i][0]);
-        for (let j = 1; j < elements[i].length; j += 2) {
-            if (elements[i][j] === "innerHTML") {
-                element.innerHTML = elements[i][j + 1];
-            } else if (elements[i][j] === "innerText") {
-                element.innerText = elements[i][j + 1];
-            } else {
-                element.setAttribute(elements[i][j], elements[i][j + 1]);
-            }
-        }
-        if (elements[i][0] === "div" && elements[i].includes("input-group mb-3")) {
-            inputGroup = element;
-            container.appendChild(inputGroup);
-        } else if (inputGroup && (elements[i][0] === "input" || elements[i][0] === "button")) {
-            inputGroup.appendChild(element);
-        } else {
-            container.appendChild(element);
-        }
-    }
+    const groupAttributes = ["class", "input-group mb-3", "id", "inputGroup"];
+    let inputGroup = document.createElement("div");
+    inputGroup = addAttributes(inputGroup, groupAttributes);
+    container.appendChild(inputGroup);
+    const inputAttributes = ["type", "text", "class", "form-control",
+        "placeholder", "Enter letter", "id", "userLetter"];
+    let input = document.createElement("input");
+    input = addAttributes(input, inputAttributes);
+    inputGroup.appendChild(input);
+    const buttonAttributes = ["type", "button", "class", "btn btn-primary",
+        "onclick", "checkLetter()"];
+    let button = document.createElement("button");
+    button.innerHTML = "Check Letter";
+    button = addAttributes(button, buttonAttributes);
+    inputGroup.appendChild(button);
+    const livesAttributes = ["id", "livesDisplay"];
+    let noLives = document.createElement("div");
+    noLives.innerText = "Lives " + lives;
+    noLives = addAttributes(noLives, livesAttributes);
+    container.appendChild(noLives);
+    const resultAttributes = ["style", "font-size:50px", "id", "resultDisplay"];
+    let resultDisplay = document.createElement("div");
+    resultDisplay = addAttributes(resultDisplay, resultAttributes);
+    container.appendChild(resultDisplay);
 }
+
 function startGame() {
     const container = document.getElementById("createHere");
     word = getRandomWord();
