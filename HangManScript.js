@@ -83,7 +83,7 @@ function checkLetter() {
     document.getElementById("userLetter").value = "";
     if (!exist) {
         --lives;
-        document.getElementById("livesDisplay").innerText = "Lives  " + lives;
+        document.getElementById("livesDisplay").innerText = "Lives " + lives;
     }
     checkGameStatus(letters);
 }
