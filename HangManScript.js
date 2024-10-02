@@ -16,29 +16,23 @@ function addAttributes(element, attributes) {
 
 function createInputGroup() {
     const container = document.getElementById("inputGroup");
-    const groupAttributes = ["class", "input-group mb-3", "id", "inputGroup"];
-    let inputGroup = document.createElement("div");
-    inputGroup = addAttributes(inputGroup, groupAttributes);
+    const inputGroup = addAttributes(document.createElement("div"),
+        ["class", "input-group mb-3", "id", "inputGroup"]);
     container.appendChild(inputGroup);
-    const inputAttributes = ["type", "text", "class", "form-control",
-        "placeholder", "Enter letter", "id", "userLetter"];
-    let input = document.createElement("input");
-    input = addAttributes(input, inputAttributes);
+    const input = addAttributes(document.createElement("input"),
+        ["type", "text", "class", "form-control", "placeholder",
+        "Enter letter", "id", "userLetter"]);
     inputGroup.appendChild(input);
-    const buttonAttributes = ["type", "button", "class", "btn btn-primary",
-        "onclick", "checkLetter()"];
-    let button = document.createElement("button");
+    const button = addAttributes(document.createElement("button"),
+        ["type", "button", "class", "btn btn-primary", "onclick", "checkLetter()"]);
     button.innerHTML = "Check Letter";
-    button = addAttributes(button, buttonAttributes);
     inputGroup.appendChild(button);
-    const livesAttributes = ["id", "livesDisplay"];
-    let noLives = document.createElement("div");
+    const noLives = addAttributes(document.createElement("div"),
+        ["id", "livesDisplay"]);
     noLives.innerText = "Lives " + lives;
-    noLives = addAttributes(noLives, livesAttributes);
     container.appendChild(noLives);
-    const resultAttributes = ["style", "font-size:50px", "id", "resultDisplay"];
-    let resultDisplay = document.createElement("div");
-    resultDisplay = addAttributes(resultDisplay, resultAttributes);
+    const resultDisplay = addAttributes(document.createElement("div"),
+        ["style", "font-size:50px", "id", "resultDisplay"]);
     container.appendChild(resultDisplay);
 }
 
@@ -47,7 +41,7 @@ function startGame() {
     word = getRandomWord();
     for (let i = 0; i < word.length; ++i) {
         const span = document.createElement("span");
-        span.innerHTML = " _ ";
+        span.innerHTML = "_ ";
         span.setAttribute("id", word[i]);
         container.appendChild(span);
     }
@@ -57,7 +51,7 @@ function startGame() {
 function checkGameStatus(letters) {
     let allGuessed = true;
     for (let i = 0; i < letters.length && allGuessed; ++i) {
-        if (letters[i].innerHTML === " _ ") {
+        if (letters[i].innerHTML === "_ ") {
             allGuessed = false;
         }
     }
